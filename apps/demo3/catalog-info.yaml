@@ -4,7 +4,6 @@ metadata:
   name: "backstage-demo3"
   annotations: 
     backstage.io/kubernetes-id: backstage-demo3
-    argocd/app-name: welcome-app
 spec:
   type: service
   owner: user:guest
