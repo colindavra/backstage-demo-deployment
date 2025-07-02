@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     name: backstage-demo2
+    "backstage.io/kubernetes-id": backstage-demo2
   name: backstage-demo2
   namespace: backstage-demo2
 spec:
@@ -14,6 +15,7 @@ spec:
     metadata:
       labels:
         name: backstage-demo2
+        "backstage.io/kubernetes-id": backstage-demo2
     spec:
       containers:
       - image: nginx:1.29.0
