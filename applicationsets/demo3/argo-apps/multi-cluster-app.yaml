@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: backstage-demo3-appset
+  namespace: argocd
+spec:
+  generators:
+    - clusters: {}
+  template:
+    metadata:
+      name: "{{name}}-backstage-demo3"
+    spec:
+      project: apps-project
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        repoURL: https://github.com/colindavra/backstage-demo-deployment.git
+        targetRevision: main
+        path: apps/demo3/base/
+      destination:
+        server: "{{server}}"
+        namespace: backstage-demo3

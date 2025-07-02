@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backstage-demo3
+    app.kubernetes.io/component: backstage-demo3
+    app.kubernetes.io/instance: backstage-demo3
+    app.kubernetes.io/name: backstage-demo3
+    app.kubernetes.io/part-of: backstage-demo3-app
+    app.openshift.io/runtime-version: latest
+  name: backstage-demo3
+  namespace: backstage-demo3
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+  selector:
+    app: backstage-demo3
+    deployment: backstage-demo3
