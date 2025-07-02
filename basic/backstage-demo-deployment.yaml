@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: backstage-demo2
+  name: backstage-demo2
+  namespace: backstage-demo2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: backstage-demo2
+  template:
+    metadata:
+      labels:
+        name: backstage-demo2
+    spec:
+      containers:
+      - image: nginx:1.29.0
+        name: backstage-demo2
+        ports:
+        - name: http
+          containerPort: 8080
