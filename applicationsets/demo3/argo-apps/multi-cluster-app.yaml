@@ -3,6 +3,8 @@ kind: ApplicationSet
 metadata:
   name: backstage-demo3-appset
   namespace: argocd
+  labels:
+    creator: davra
 spec:
   generators:
     - clusters: {}
