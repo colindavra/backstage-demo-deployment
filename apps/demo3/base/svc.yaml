@@ -10,6 +10,7 @@ metadata:
     app.kubernetes.io/name: backstage-demo3
     app.kubernetes.io/part-of: backstage-demo3-app
     app.openshift.io/runtime-version: latest
+    "backstage.io/kubernetes-id": backstage-demo3
   name: backstage-demo3
   namespace: backstage-demo3
 spec:

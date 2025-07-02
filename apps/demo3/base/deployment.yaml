@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/instance: backstage-demo3
     app.kubernetes.io/name: backstage-demo3
     app.kubernetes.io/part-of: backstage-demo3-app
+    "backstage.io/kubernetes-id": backstage-demo3
 spec:
   replicas: 1
   selector:

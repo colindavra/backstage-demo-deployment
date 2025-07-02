@@ -3,5 +3,4 @@ resources:
   - namespace.yaml
   - svc.yaml
 
-labels:
-  "backstage.io/kubernetes-id": backstage-demo3
+  
