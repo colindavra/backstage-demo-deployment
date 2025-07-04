@@ -2,5 +2,6 @@ resources:
   - deployment.yaml
   - namespace.yaml
   - svc.yaml
+  - vault-serviceaccount.yaml
 
   
