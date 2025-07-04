@@ -22,6 +22,7 @@ spec:
         app: backstage-demo3
         deployment: backstage-demo3
         backstage.io/kubernetes-id: backstage-demo3
+      annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/agent-inject-status: "update"
         vault.hashicorp.com/agent-inject-secret-davra-token: "secret/backstage-demo3"
