@@ -28,7 +28,7 @@ spec:
         vault.hashicorp.com/agent-inject-secret-davra-token: "secret/backstage-demo3"
         vault.hashicorp.com/agent-inject-template-davra-token: |
           {{- with secret "secret/backstage-demo3" -}}
-          {{ .Data.data.davra-token }}
+          {{ .Data.data.davratoken }}
           {{- end }}
         vault.hashicorp.com/role: "vault-role"
     spec:
