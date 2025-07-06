@@ -18,7 +18,7 @@ spec:
         "backstage.io/kubernetes-id": backstage-demo2
     spec:
       containers:
-      - image: nginx:1.28.0
+      - image: nginx:1.29.0
         name: backstage-demo2
         ports:
         - name: http
