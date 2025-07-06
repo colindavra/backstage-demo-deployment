@@ -2,6 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: backstage-demo3
+  namespace: backstage-demo3
 spec:
   selector:
     matchLabels:
