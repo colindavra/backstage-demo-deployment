@@ -20,7 +20,7 @@ spec:
       source:
         repoURL: https://github.com/colindavra/backstage-demo-deployment.git
         targetRevision: main
-        path: apps/demo3/overlays/"{{.metadata.labels.stage}}"
+        path: apps/demo3/overlays/"{{metadata.labels.stage}}"
       destination:
         server: "{{server}}"
         namespace: backstage-demo3
