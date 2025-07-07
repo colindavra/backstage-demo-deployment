@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+  labels:
+    backstage.io/kubernetes-id: backstage-demo3
+  name: backstage-demo3
+  namespace: backstage-demo3
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: backstage-demo3.colin.developers.davra.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: backstage-demo3
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix

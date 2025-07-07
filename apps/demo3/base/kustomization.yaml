@@ -3,5 +3,6 @@ resources:
   - namespace.yaml
   - svc.yaml
   - vault-serviceaccount.yaml
+  - ingress.yaml
 
   
