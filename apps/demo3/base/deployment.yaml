@@ -30,11 +30,13 @@ spec:
           {{- with secret "secret/backstage-demo3" -}}
           {{ .Data.data.davratoken }}
           {{- end }}
+        vault.hashicorp.com/secret-volume-path-davra-token: /etc/connecthing-api
+        vault.hashicorp.com/agent-inject-file-davra-token: token
         vault.hashicorp.com/role: "vault-role"
     spec:
       containers:
         - name: backstage-demo3
-          image: nginx:1.29.0
+          image: davra-sample-microservice:1.0.1
           ports:
             - containerPort: 8080
               protocol: TCP
