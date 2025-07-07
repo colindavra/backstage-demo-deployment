@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: backstage-demo3-prod.colin.developers.davra.io
+  - host: backstage-demo3-prod.pxcpoc.davra.com
     http:
       paths:
       - backend:
