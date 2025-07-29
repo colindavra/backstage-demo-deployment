@@ -4,7 +4,7 @@ resources:
   - svc.yaml
   - vault-serviceaccount.yaml
   - gateway.yaml
-  - httpRoute.yaml
+  - httpRoute-BlueGreen.yaml
   - deployment-v2.yaml
   - svc-v2.yaml
 

@@ -10,10 +10,3 @@ spec:
   - backendRefs:
       - name: backstage-demo3
         port: 8080
-  - matches:
-    - headers:
-      - name: traffic
-        value: test
-    backendRefs:
-    - name: backstage-demo3-v2
-      port: 8080
