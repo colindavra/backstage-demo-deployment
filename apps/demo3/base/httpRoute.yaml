@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: backstage-demo3
+  namespace: backstage-demo3
+spec:
+  parentRefs:
+  - name: backstage-demo3-gateway
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: backstage-demo3
+      port: 8080

@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
         - name: backstage-demo3
-          image: davradocker/davra-sample-microservice:1.0.1
+          image: davradocker/pxc-poc-sample-microservice:1.0.1
           ports:
             - containerPort: 8080
               protocol: TCP
