@@ -4,3 +4,4 @@ metadata:
   name: backstage-demo3
   labels:
     "backstage.io/kubernetes-id": backstage-demo3
+    "istio.io/dataplane-mode": ambient
