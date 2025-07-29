@@ -5,7 +5,5 @@ resources:
   - vault-serviceaccount.yaml
   - gateway.yaml
   - httpRoute.yaml
-  - deployment-v2.yaml
-  - svc-v2.yaml
 
   
