@@ -1,10 +1,11 @@
 resources:
   - deployment.yaml
-  - deployment-v2.yaml
   - namespace.yaml
   - svc.yaml
   - vault-serviceaccount.yaml
   - gateway.yaml
   - httpRoute.yaml
+  - deployment-v2.yaml
+  - svc-v2.yaml
 
   

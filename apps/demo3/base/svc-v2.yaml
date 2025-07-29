@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/part-of: backstage-demo3-app
     app.openshift.io/runtime-version: latest
     "backstage.io/kubernetes-id": backstage-demo3
-  name: backstage-demo3
+  name: backstage-demo3-v2
   namespace: backstage-demo3
 spec:
   ports:
@@ -23,5 +23,5 @@ spec:
       port: 8443
       targetPort: 8443
   selector:
-    app: backstage-demo3
-    version: v1
+    app: backstage-demo3-app
+    version: v2
