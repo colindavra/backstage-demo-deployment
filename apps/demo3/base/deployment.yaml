@@ -17,7 +17,6 @@ spec:
       app: backstage-demo3
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: backstage-demo3
         deployment: backstage-demo3
