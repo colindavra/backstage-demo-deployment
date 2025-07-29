@@ -14,3 +14,7 @@ spec:
     backendRefs:
     - name: backstage-demo3
       port: 8080
+      weight: 90
+    - name: backstage-demo3-v2
+      port: 8080
+      weight: 10
