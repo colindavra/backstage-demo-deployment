@@ -22,7 +22,7 @@ metadata:
   namespace: backstage-demo3
 spec:
   parentRefs:
-  - name: backstage-demo3
+  - name: backstage-demo3-gateway
   rules:
   - matches:
     - path:
