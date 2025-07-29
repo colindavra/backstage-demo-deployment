@@ -24,3 +24,4 @@ spec:
       targetPort: 8443
   selector:
     app: backstage-demo3
+    version: v1

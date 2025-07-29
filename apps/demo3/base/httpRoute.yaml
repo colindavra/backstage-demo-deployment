@@ -7,10 +7,13 @@ spec:
   parentRefs:
   - name: backstage-demo3-gateway
   rules:
+  - backendRefs:
+      - name: backstage-demo3
+        port: 8080
   - matches:
-    - path:
-        type: PathPrefix
-        value: /
+    - headers:
+      - name: traffic
+        value: test
     backendRefs:
-    - name: backstage-demo3
+    - name: backstage-demo3-v2
       port: 8080
