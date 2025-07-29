@@ -1,11 +1,11 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: backstage-demo3
+  name: backstage-demo3-v2
   namespace: backstage-demo3
   labels:
     app: backstage-demo3
-    version: v1
+    version: v2
     app.kubernetes.io/component: backstage-demo3
     app.kubernetes.io/instance: backstage-demo3
     app.kubernetes.io/name: backstage-demo3
@@ -16,12 +16,12 @@ spec:
   selector:
     matchLabels:
       app: backstage-demo3
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: backstage-demo3
-        version: v1
+        version: v2
         deployment: backstage-demo3
         backstage.io/kubernetes-id: backstage-demo3
       annotations:

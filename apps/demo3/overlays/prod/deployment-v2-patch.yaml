@@ -1,13 +1,13 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: backstage-demo3
+  name: backstage-demo3-v2
   namespace: backstage-demo3
 spec:
   selector:
     matchLabels:
       app: backstage-demo3
-      version: v1
+      version: v2
   template:
     metadata:
       annotations:
