@@ -4,4 +4,4 @@ bases:
 - ../../base
 patchesStrategicMerge:
 - deployment-patch.yaml
-- deployment-patch-v2.yaml
+- deployment-v2-patch.yaml
