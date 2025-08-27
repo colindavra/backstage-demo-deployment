@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "backstage-demo3"
+  annotations: 
+    backstage.io/kubernetes-id: backstage-demo3
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: experimental

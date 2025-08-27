@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: smart-grid
+  labels:
+    "backstage.io/kubernetes-id": smart-grid
+    "istio.io/dataplane-mode": ambient

@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    connecthing.io/microservice-uuid: MS_UUID
+  labels:
+    app: smart-grid
+    app.kubernetes.io/component: smart-grid
+    app.kubernetes.io/instance: smart-grid
+    app.kubernetes.io/name: smart-grid
+    app.kubernetes.io/part-of: smart-grid-app
+    connecthing.io/microservice: "true"
+    connecthing.io/tenantId: test2
+    davra.com/microservice-UUID: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+    davra.com/microservice-deployment-label: production
+    davra.com/tenantId: test2
+  name: smart-grid
+  namespace: smart-grid
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+  selector:
+    name: smart-grid-v1
