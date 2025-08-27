@@ -1,6 +1,58 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
+resources:
 - ../../base
 
 namespace: 0372826bdd934ea587eab51f68caf065
+
+patches:
+  - target:
+      kind: Deployment
+      name: smart-grid-v1
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/connecthing.io~1microservice-uuid
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: /metadata/annotations/davra.com~1microservice-uuid
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: /metadata/labels/davra.com~1microservice-UUID
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: spec/selector/matchLabels/davra.com~1microservice-UUID
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: spec/template/metadata/annotations/connecthing.io~1microservice-uuid
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: spec/template/metadata/annotations/davra.com~1microservice-uuid
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: /spec/template/metadata/labels/davra.com~1microservice-UUID
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+  - target:
+      kind: Deployment
+      name: smart-grid-v2
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/connecthing.io~1microservice-uuid
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: /metadata/annotations/davra.com~1microservice-uuid
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: /metadata/labels/davra.com~1microservice-UUID
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: spec/selector/matchLabels/davra.com~1microservice-UUID
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: spec/template/metadata/annotations/connecthing.io~1microservice-uuid
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: spec/template/metadata/annotations/davra.com~1microservice-uuid
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: /spec/template/metadata/labels/davra.com~1microservice-UUID
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
