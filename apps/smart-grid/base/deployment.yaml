@@ -76,6 +76,15 @@ spec:
       securityContext: {}
       schedulerName: default-scheduler
       imagePullSecrets: []
+      volumes:
+        - name: connecthing-api-secret
+          secret:
+            defaultMode: 420
+            secretName: MS_UUID
+        - name: client-cert
+          secret:
+            defaultMode: 420
+            secretName: MS_UUID-client-cert
   strategy:
     type: RollingUpdate
     rollingUpdate:
