@@ -20,13 +20,13 @@ patches:
         path: /metadata/labels/davra.com~1microservice-UUID
         value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
       - op: replace
-        path: spec/selector/matchLabels/davra.com~1microservice-UUID
+        path: /spec/selector/matchLabels/davra.com~1microservice-UUID
         value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
       - op: replace
-        path: spec/template/metadata/annotations/connecthing.io~1microservice-uuid
+        path: /spec/template/metadata/annotations/connecthing.io~1microservice-uuid
         value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
       - op: replace
-        path: spec/template/metadata/annotations/davra.com~1microservice-uuid
+        path: /spec/template/metadata/annotations/davra.com~1microservice-uuid
         value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
       - op: replace
         path: /spec/template/metadata/labels/davra.com~1microservice-UUID
@@ -45,13 +45,13 @@ patches:
         path: /metadata/labels/davra.com~1microservice-UUID
         value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
       - op: replace
-        path: spec/selector/matchLabels/davra.com~1microservice-UUID
+        path: /spec/selector/matchLabels/davra.com~1microservice-UUID
         value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
       - op: replace
-        path: spec/template/metadata/annotations/connecthing.io~1microservice-uuid
+        path: /spec/template/metadata/annotations/connecthing.io~1microservice-uuid
         value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
       - op: replace
-        path: spec/template/metadata/annotations/davra.com~1microservice-uuid
+        path: /spec/template/metadata/annotations/davra.com~1microservice-uuid
         value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
       - op: replace
         path: /spec/template/metadata/labels/davra.com~1microservice-UUID
