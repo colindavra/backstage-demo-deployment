@@ -52,13 +52,39 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: Always
-          env: []
+          env:
+            - name: KAFKA_HOST
+              value: kafka.default:9092
+            - name: IoT_DATA_TOPIC_NAME
+              value: test2.ruban-iotdata
+            - name: DEVICE_UPDATES_TOPIC_NAME
+              value: test2.device-updates
+            - name: TWIN_UPDATES_TOPIC_NAME
+              value: test2.twin-updates
+            - name: TWIN_TYPE_UPDATES_TOPIC_NAME
+              value: test2.twintype-updates
+            - name: KAFKA_CONSUMER_GROUP_ID
+              value: MS_UUID
+          volumeMounts:
+            - mountPath: /etc/connecthing-api
+              name: connecthing-api-secret
+            - mountPath: /etc/davra/tls
+              name: client-cert
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
       imagePullSecrets: []
+      volumes:
+        - name: connecthing-api-secret
+          secret:
+            defaultMode: 420
+            secretName: MS_UUID
+        - name: client-cert
+          secret:
+            defaultMode: 420
+            secretName: MS_UUID-client-cert
   strategy:
     type: RollingUpdate
     rollingUpdate:

@@ -31,6 +31,15 @@ patches:
       - op: replace
         path: /spec/template/metadata/labels/davra.com~1microservice-UUID
         value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: /spec/template/spec/containers/0/env/5/value
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: /spec/template/spec/volumes/0/secret/secretName
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122
+      - op: replace
+        path: /spec/template/spec/volumes/1/secret/secretName
+        value: 54e9a7db-f377-49e4-8df6-85ad36d6b122-client-cert
   - target:
       kind: Deployment
       name: smart-grid-v2
@@ -56,3 +65,13 @@ patches:
       - op: replace
         path: /spec/template/metadata/labels/davra.com~1microservice-UUID
         value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: /spec/template/spec/containers/0/env/5/value
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: /spec/template/spec/volumes/0/secret/secretName
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
+      - op: replace
+        path: /spec/template/spec/volumes/1/secret/secretName
+        value: 2b386ae8-e2e2-4170-86e1-eef6e3892f96-client-cert
+
