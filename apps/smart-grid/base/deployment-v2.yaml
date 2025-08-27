@@ -59,7 +59,6 @@ spec:
       securityContext: {}
       schedulerName: default-scheduler
       imagePullSecrets: []
-      serviceAccountName: vault-serviceaccount
   strategy:
     type: RollingUpdate
     rollingUpdate:
