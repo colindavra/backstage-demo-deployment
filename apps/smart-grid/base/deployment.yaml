@@ -41,7 +41,7 @@ spec:
         name: smart-grid-v1
     spec:
       containers:
-        - name: smart-grid
+        - name: smart-grid-v1
           image: davradocker/davra-sample-microservice:1.0.1
           ports:
             - containerPort: 8080

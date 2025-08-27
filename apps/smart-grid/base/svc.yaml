@@ -15,7 +15,7 @@ metadata:
     davra.com/microservice-UUID: 2b386ae8-e2e2-4170-86e1-eef6e3892f96
     davra.com/microservice-deployment-label: production
     davra.com/tenantId: test2
-  name: smart-grid
+  name: smart-grid-v1
   namespace: smart-grid
 spec:
   ports:

@@ -41,7 +41,7 @@ spec:
         name: smart-grid-v2
     spec:
       containers:
-        - name: smart-grid
+        - name: smart-grid-v2
           image: docker.io/davradocker/pxc-poc-sample-microservice:2.0.0
           ports:
             - containerPort: 8080
