@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/part-of: backstage-demo3-app
     backstage.io/kubernetes-id: backstage-demo3
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: backstage-demo3
