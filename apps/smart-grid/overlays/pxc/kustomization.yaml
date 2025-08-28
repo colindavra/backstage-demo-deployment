@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - ../../base
 
-namespace: 0372826bdd934ea587eab51f68caf065
+namespace: 089505781935bd97a3feb8f420f394ec
 
 patches:
   - target:
