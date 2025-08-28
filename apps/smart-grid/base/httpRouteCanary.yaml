@@ -8,7 +8,7 @@ spec:
   - name: smart-grid-gateway
   rules:
   - backendRefs:
-      - name: smart-grid
+      - name: smart-grid-v1
         port: 8080
   - matches:
     - headers:

@@ -12,7 +12,7 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-    - name: smart-grid
+    - name: smart-grid-v1
       port: 8080
       weight: 90
     - name: smart-grid-v2
