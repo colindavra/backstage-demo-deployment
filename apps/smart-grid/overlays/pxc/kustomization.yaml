@@ -1,0 +1,97 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+
+namespace: 0372826bdd934ea587eab51f68caf065
+
+patches:
+  - target:
+      kind: Deployment
+      name: smart-grid-v1
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/connecthing.io~1microservice-uuid
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /metadata/annotations/davra.com~1microservice-uuid
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /metadata/labels/davra.com~1microservice-UUID
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /spec/selector/matchLabels/davra.com~1microservice-UUID
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /spec/template/metadata/annotations/connecthing.io~1microservice-uuid
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /spec/template/metadata/annotations/davra.com~1microservice-uuid
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /spec/template/metadata/labels/davra.com~1microservice-UUID
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /spec/template/spec/containers/0/env/5/value
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /spec/template/spec/volumes/0/secret/secretName
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /spec/template/spec/volumes/1/secret/secretName
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a-client-cert
+  - target:
+      kind: Service
+      name: smart-grid-v1
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/connecthing.io~1microservice-uuid
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+      - op: replace
+        path: /metadata/labels/davra.com~1microservice-UUID
+        value: 6a9b50e4-31a3-4b8d-b890-6cb16a33873a
+  - target:
+      kind: Deployment
+      name: smart-grid-v2
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/connecthing.io~1microservice-uuid
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /metadata/annotations/davra.com~1microservice-uuid
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /metadata/labels/davra.com~1microservice-UUID
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /spec/selector/matchLabels/davra.com~1microservice-UUID
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /spec/template/metadata/annotations/connecthing.io~1microservice-uuid
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /spec/template/metadata/annotations/davra.com~1microservice-uuid
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /spec/template/metadata/labels/davra.com~1microservice-UUID
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /spec/template/spec/containers/0/env/5/value
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /spec/template/spec/volumes/0/secret/secretName
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /spec/template/spec/volumes/1/secret/secretName
+        value: b1484f90-4c41-4bc6-8161-983c1454092b-client-cert
+  - target:
+      kind: Service
+      name: smart-grid-v2
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/connecthing.io~1microservice-uuid
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+      - op: replace
+        path: /metadata/labels/davra.com~1microservice-UUID
+        value: b1484f90-4c41-4bc6-8161-983c1454092b
+
