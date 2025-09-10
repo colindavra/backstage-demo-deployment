@@ -5,7 +5,6 @@ metadata:
     connecthing.io/microservice-uuid: MS_UUID
     davra.com/microservice-uuid: MS_UUID
   name: smart-grid-v2
-  namespace: smart-grid
   labels:
     app: smart-grid
     version: v2

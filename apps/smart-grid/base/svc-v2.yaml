@@ -17,7 +17,6 @@ metadata:
     davra.com/microservice-deployment-label: production
     davra.com/tenantId: test2
   name: smart-grid-v2
-  namespace: smart-grid
 spec:
   ports:
     - name: 8080-tcp

@@ -4,7 +4,6 @@ metadata:
   annotations:
     "networking.istio.io/service-type": ClusterIP
   name: smart-grid-gateway
-  namespace: smart-grid
 spec:
   gatewayClassName: istio
   listeners:
