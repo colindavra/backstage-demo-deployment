@@ -18,6 +18,9 @@ patches:
         path: /metadata/labels/davra.com~1microservice-UUID
         value: f539893e-4712-4db5-b6d0-f11861bd651f
       - op: replace
+        path: /metadata/labels/davra.com~1tenantId
+        value: colin
+      - op: replace
         path: /spec/selector/matchLabels/davra.com~1microservice-UUID
         value: f539893e-4712-4db5-b6d0-f11861bd651f
       - op: replace
@@ -61,6 +64,9 @@ patches:
       - op: replace
         path: /metadata/labels/davra.com~1microservice-UUID
         value: 35505f6f-895e-42f8-9c4e-5c4382771a4d
+      - op: replace
+        path: /metadata/labels/davra.com~1tenantId
+        value: colin
       - op: replace
         path: /spec/selector/matchLabels/davra.com~1microservice-UUID
         value: 35505f6f-895e-42f8-9c4e-5c4382771a4d
