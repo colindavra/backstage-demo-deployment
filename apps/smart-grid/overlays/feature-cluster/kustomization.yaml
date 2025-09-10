@@ -3,8 +3,6 @@ kind: Kustomization
 resources:
 - ../../base
 
-namespace: 7985a7c49052aefcb1b3b621fde4130d
-
 patches:
   - target:
       kind: Deployment
