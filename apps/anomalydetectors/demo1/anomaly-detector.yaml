@@ -8,7 +8,7 @@ spec:
   description: "gitops demo for anomaly detector"
   status: active
   calculationFrequency: 24
-  dCalculationFrequency: 60
+  dCalculationFrequency: 300
   slidingWindowSize: 60
   relativeLearningPeriod: 60
   anomalyThreshold: 20
