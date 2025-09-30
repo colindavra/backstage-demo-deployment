@@ -1,0 +1,30 @@
+apiVersion: alpha.davra.com/v1alpha1
+kind: AnomalyDetector
+metadata:
+  name: demo1-anomalydetector
+  namespace: 74a157996c914a5981126ed814799757
+spec:
+  name: demo1
+  description: "gitops demo for anomaly detector"
+  status: active
+  calculationFrequency: 24
+  dCalculationFrequency: 60
+  slidingWindowSize: 60
+  relativeLearningPeriod: 60
+  anomalyThreshold: 20
+  datasources:
+  - name: "43040_100"
+    aggregator: avg
+  - name: "43040_101"
+    aggregator: avg
+  - name: "43040_102"
+    aggregator: avg
+  - name: "43040_103"
+    aggregator: avg
+  - name: "43040_104"
+    aggregator: avg
+  assets:
+  - assetType: label
+    labelKey: davraperftestlabel
+    labelValues: 
+    - davraperftestlabel
