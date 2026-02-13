@@ -1,0 +1,9 @@
+resources:
+  - deployment.yaml
+  - svc.yaml
+  - gateway.yaml
+  - httpRoute.yaml
+  - deployment.yaml
+  - svc.yaml
+
+  

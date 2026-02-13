@@ -1,0 +1,52 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: trust1
+  namespace: trust1
+  labels:
+    app: trust1
+    version: v1
+    app.kubernetes.io/component: trust1
+    app.kubernetes.io/instance: trust1
+    app.kubernetes.io/name: trust1
+    app.kubernetes.io/part-of: trust1-app
+    backstage.io/kubernetes-id: trust1
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: trust1
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: trust1
+        version: v1
+        deployment: trust1
+        backstage.io/kubernetes-id: trust1
+    spec:
+      containers:
+        - name: trust1
+          image: davradocker/trust1poc:0.0.1
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+          env: []
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      imagePullSecrets: []
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  paused: false

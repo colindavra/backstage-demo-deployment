@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "trust1"
+  annotations: 
+    backstage.io/kubernetes-id: trust1
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: experimental
