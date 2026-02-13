@@ -2,7 +2,7 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   annotations:
-    "networking.istio.io/service-type": ClusterIP
+    "networking.istio.io/service-type": NodePort
   name: trust1-gateway
   namespace: trust1
 spec:
