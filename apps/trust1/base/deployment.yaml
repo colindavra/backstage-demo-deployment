@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/part-of: trust1-app
     backstage.io/kubernetes-id: trust1
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: trust1
