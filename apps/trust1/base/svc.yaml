@@ -14,9 +14,9 @@ metadata:
   namespace: trust1
 spec:
   ports:
-    - name: 8080-tcp
+    - name: http
       protocol: TCP
-      port: 8080
+      port: 3000
       targetPort: 3000
   selector:
     app: trust1
