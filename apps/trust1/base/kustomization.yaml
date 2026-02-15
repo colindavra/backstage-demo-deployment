@@ -4,6 +4,5 @@ resources:
   - svc.yaml
   - gateway.yaml
   - httpRoute.yaml
-  - requestAuthentication.yaml
 
   
