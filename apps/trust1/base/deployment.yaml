@@ -10,7 +10,6 @@ metadata:
     app.kubernetes.io/instance: trust1
     app.kubernetes.io/name: trust1
     app.kubernetes.io/part-of: trust1-app
-    backstage.io/kubernetes-id: trust1
 spec:
   replicas: 1
   selector:
