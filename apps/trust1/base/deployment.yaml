@@ -27,9 +27,9 @@ spec:
     spec:
       containers:
         - name: trust1
-          image: davradocker/trust1poc:0.0.1
+          image: davradocker/davra-sample-microservice:1.0.1
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
               protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
