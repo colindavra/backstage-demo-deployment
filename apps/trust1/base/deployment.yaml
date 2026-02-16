@@ -28,7 +28,7 @@ spec:
         - name: trust1
           image: nginx:1.29.0
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
