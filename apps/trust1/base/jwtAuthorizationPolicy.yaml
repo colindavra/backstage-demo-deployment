@@ -1,0 +1,15 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: require-jwt
+  namespace: trust1
+spec:
+  targetRef:
+    group: ""
+    kind: Service
+    name: trust1
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        requestPrincipals: ["*"]  # Matches any valid JWT

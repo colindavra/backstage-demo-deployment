@@ -4,9 +4,10 @@ metadata:
   name: "jwt-authentication"
   namespace: trust1
 spec:
-  selector:
-    matchLabels:
-      app: trust1
+  targetRef:
+    group: ""
+    kind: Service
+    name: trust1
   jwtRules:
   - issuer: "trust1dc"
     jwksUri: "https://raw.githubusercontent.com/colindavra/backstage-demo-deployment/refs/heads/main/apps/trust1/jwks.json"
