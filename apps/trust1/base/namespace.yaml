@@ -5,3 +5,4 @@ metadata:
   labels:
     "backstage.io/kubernetes-id": trust1
     "istio.io/dataplane-mode" : ambient
+    "istio.io/use-waypoint": waypoint
