@@ -4,5 +4,6 @@ resources:
   - httpRoute.yaml
   - namespace.yaml
   - svc.yaml
+  - waypoint.yaml
 
   
