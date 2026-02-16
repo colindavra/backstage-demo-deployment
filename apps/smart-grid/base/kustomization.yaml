@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - svc.yaml
-  - gateway.yaml
   - httpRoute-BlueGreen.yaml
   - deployment-v2.yaml
   - svc-v2.yaml
