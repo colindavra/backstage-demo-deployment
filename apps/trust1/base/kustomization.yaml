@@ -1,8 +1,8 @@
 resources:
-  - namespace.yaml
   - deployment.yaml
-  - svc.yaml
   - gateway.yaml
   - httpRoute.yaml
+  - namespace.yaml
+  - svc.yaml
 
   

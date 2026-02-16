@@ -4,3 +4,4 @@ metadata:
   name: trust1
   labels:
     "backstage.io/kubernetes-id": trust1
+    "istio.io/dataplane-mode" : ambient
