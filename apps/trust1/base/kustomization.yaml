@@ -3,6 +3,7 @@ resources:
   - gateway.yaml
   - httpRoute.yaml
   - namespace.yaml
+  - requestAuthentication.yaml
   - svc.yaml
   - waypoint.yaml
 
