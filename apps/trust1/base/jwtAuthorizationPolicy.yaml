@@ -8,8 +8,8 @@ spec:
     group: ""
     kind: Service
     name: trust1
-  action: ALLOW
+  action: DENY
   rules:
   - from:
     - source:
-        requestPrincipals: ["*"]  # Matches any valid JWT
+        notRequestPrincipals: ["*"]
