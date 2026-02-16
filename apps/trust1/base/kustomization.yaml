@@ -2,6 +2,7 @@ resources:
   - deployment.yaml
   - gateway.yaml
   - httpRoute.yaml
+  - jwtAuthorizationPolicy.yaml
   - namespace.yaml
   - requestAuthentication.yaml
   - svc.yaml
