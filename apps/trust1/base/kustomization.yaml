@@ -1,5 +1,6 @@
 resources:
   - deployment.yaml
+  - dsPrivateKeyVaultSecret.yaml
   - gateway.yaml
   - httpRoute.yaml
   - jwtAuthorizationPolicy.yaml
