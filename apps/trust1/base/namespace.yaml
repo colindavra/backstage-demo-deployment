@@ -6,3 +6,5 @@ metadata:
     "backstage.io/kubernetes-id": trust1
     "istio.io/dataplane-mode" : ambient
     "istio.io/use-waypoint": waypoint
+    "connecthing.io/microservice": "true"
+    "connecthing.io/tenantId": trust1
