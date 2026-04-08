@@ -1,0 +1,29 @@
+apiVersion: kubernetes.m.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: cassandra-auth-object
+  namespace: default
+spec:
+  references:
+  - patchesFrom:
+      apiVersion: v1
+      kind: Secret
+      name: "cassandra-auth"
+      namespace: default
+      fieldPath: data.username
+    toFieldPath: data.username
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: cassandra-auth-copy
+        namespace: default
+        labels:
+          argocd.argoproj.io/secret-type: cluster
+      type: Opaque
+      data:
+        username: ""
+  providerConfigRef:
+    name: kubernetes-provider
+    kind: ProviderConfig

@@ -1,0 +1,16 @@
+apiVersion: ram.alibabacloud.crossplane.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ram/v1alpha1/davra-gitops-test-user-1
+  labels:
+    testing.crossplane.io/example-name: davra-gitops-test-user-1
+  name: davra-gitops-test-user-1
+spec:
+  forProvider:
+    comments: created by provider-upjet-alibabacloud
+    displayName: davra-gitops-test-user-1
+    email: davra-gitops-test-user-1@crossplane.io
+    name: davra-gitops-test-user-1
+  providerConfigRef:
+    name: alibabacloud-provider

@@ -1,0 +1,27 @@
+---
+apiVersion: keycloak.m.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: keycloak-provider-config
+spec:
+  credentialsSecretRef:
+    name: keycloak-credentials
+    key: credentials
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak-credentials
+  labels:
+    type: provider-credentials
+type: Opaque
+stringData:
+  credentials: |
+    {
+      "client_id":"admin-cli",
+      "username": "colin",
+      "password": "hothouse18",
+      "url": "https://keycloak.colin.developers.davra.io",
+      "base_path": "/",
+      "realm": "master"
+    }

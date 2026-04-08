@@ -1,0 +1,46 @@
+apiVersion: apiextensions.crossplane.io/v2
+kind: CompositeResourceDefinition
+metadata:
+  name: davraaliclusters.platform.davra.com
+spec:
+  group: platform.davra.com
+  names:
+    kind: DavraAliCluster
+    plural: davraaliclusters
+  scope: Cluster
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - region
+                - version
+              properties:
+                region:
+                  type: string
+                version:
+                  type: string
+                writeConnectionSecretToRef:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    namespace:
+                      type: string
+            status:
+              type: object
+              properties:
+                vpcId:
+                  type: string
+                subnetAId:
+                  type: string
+                subnetBId:
+                  type: string
+                clusterId:
+                  type: string

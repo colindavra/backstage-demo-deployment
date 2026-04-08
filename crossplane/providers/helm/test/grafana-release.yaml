@@ -1,0 +1,50 @@
+apiVersion: helm.crossplane.io/v1beta1
+kind: Release
+metadata:
+  name: grafana-release
+spec:
+  forProvider:
+    chart:
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+    namespace: telemetry-test1
+    values: 
+      ingress:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+        path: /
+
+
+        hosts:
+          - grafana2.colin.developers.davra.io
+
+        tls:
+          - hosts:
+              - grafana2.colin.developers.davra.io
+
+      assertNoLeakedSecrets: false
+
+      grafana.ini:
+        server:
+          root_url: https://grafana2.colin.developers.davra.io
+
+        users:
+          default_theme: light
+
+        auth.generic_oauth:
+          enabled: true
+          name: Keycloak-OAuth
+          allow_sign_up: true
+          client_id: grafana
+          client_secret: wd2sTiyyAlIFizFmcL82cENHMCj8rbtr
+          scopes: openid email profile offline_access roles
+          email_attribute_path: email
+          login_attribute_path: username
+          name_attribute_path: full_name
+          auth_url: https://keycloak.colin.developers.davra.io/realms/basic-realm/protocol/openid-connect/auth
+          token_url: https://keycloak.colin.developers.davra.io/realms/basic-realm/protocol/openid-connect/token
+          api_url: https://keycloak.colin.developers.davra.io/realms/basic-realm/protocol/openid-connect/userinfo
+          role_attribute_path: contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
+  providerConfigRef:
+    name: helm-provider

@@ -1,0 +1,11 @@
+apiVersion: platform.example.org/v1alpha1
+kind: XCluster
+metadata:
+  name: dev-cluster
+  namespace: default
+spec:
+  region: eu-west-3
+  version: "1.30"
+  writeConnectionSecretToRef:
+    name: dev-cluster-kubeconfig
+    namespace: argocd

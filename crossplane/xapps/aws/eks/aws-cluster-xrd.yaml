@@ -1,0 +1,35 @@
+apiVersion: apiextensions.crossplane.io/v2
+kind: CompositeResourceDefinition
+metadata:
+  name: xclusters.platform.example.org
+spec:
+  group: platform.example.org
+  names:
+    kind: XCluster
+    plural: xclusters
+  scope: Namespaced
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - region
+                - version
+              properties:
+                region:
+                  type: string
+                version:
+                  type: string
+                writeConnectionSecretToRef:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    namespace:
+                      type: string

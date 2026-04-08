@@ -1,0 +1,16 @@
+apiVersion: vpc.alibabacloud.crossplane.io/v1alpha1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/vswitch
+  labels:
+    testing.upbound.io/example-name: davra-gitops-test-vpc-1
+  name: davra-gitops-test-vpc-1
+spec:
+  forProvider:
+    cidrBlock: 172.20.0.0/16
+    region: cn-chengdu
+    resourceGroupId: rg-aek6hvxecshsx5a
+    vpcName: davra-gitops-test-vpc-1
+  providerConfigRef:
+    name: alibabacloud-provider

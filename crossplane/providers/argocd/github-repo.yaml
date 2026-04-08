@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: davra-gitops-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://github.com/Davra/davra-gitops-system
+  githubAppID: "3085643"
+  githubAppInstallationID: "116661092"
+  githubAppPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    MIIEowIBAAKCAQEAsI7/A3L94rF6GcjznwqAa4/3GB8LydSW+om32rexuBpQcHkW
+    /tM0GHs6t25sGY/h9TUDH4UV8orJqMEDmrM4ktLfXyAErrRbZj+mE6cJsbqF3kS6
+    jF9wc+hCSsbGHOBnm/+PSWAei79l/KSgWscvCXw6LtW0iS1aAxy7nQy3sRab3AbY
+    qmXd/r9toHOKYQLU8Eer33t1mtfUH3Z6UUmouxTcnJOg6XwwJFOMTA0GBiLmNyO7
+    4C0HlzaCg2CKurYaWCvVGrXlABvPgOyBsY+3ZEulaPCcgbAYwyKjwI8oZnG1YT9s
+    Y83AAPhkGMo2tu1L83zfZbQz56CdLz2Jr0zfhwIDAQABAoIBAQCLolwO50fhnIk7
+    kVETbCPKbc53Fj6lfet186sjYHo+ZxlNCodkO7cM0ZDLd5oo0UFcQ3PX3tJPwvHf
+    896c37cTb5DXU6RAY0WR5S68hjPFiwXKlsKOuABgusSLDQ+r0NJAbupslocx8MqA
+    99YWVUdfEg+V8M/aWbLBmVzLxT4V38EjZuZUt0qSm7rtYcZZnqPZ+AUjGPKJEcK9
+    v4HKT3rgXFesp8ecWadgman7roiy3b5s7o3YCrLKq69q266n+Y0JuGtUbJ/iqj8s
+    x7rXw7XxEDxGTWNIEaow9v46sVjSB1MstK1Zhq67KiLz3sCmCeqZybHlzU7luxMV
+    rb0o6PtRAoGBAOdRUcnHRDG34x5OzF+8SiFyIUNM2Ex25GXxO3ZPFCL3/6v6o/Fj
+    qsWlvkrWicHKMAjs9X5Q+eS9wWQW7ao3GUHWXvVpj5jCuPm01KTf1GYP/FMnkOU8
+    0DGgYtdoY0EC3jobbhxbrWV5Sytr1cEQ9oorzl0e5CkO/xNwcbWR+CopAoGBAMNl
+    4ECNVLKatKux5z0AD5P+MVGJP2WlCdwjTc+y/7l+ydGVf08rZ+1rbctLKYA82G3C
+    yhDvs+Ul5KJSBNr5XtCtWzCKlw05llTPztMYu+CUe6sHU3L7uzf7Mh0IFerR3v6w
+    H4xT32mmQCFZGtL76rFD2FCzOwAtcODxIHYa3FIvAoGAbHpYTrYiJubDndz6PxM/
+    +HtbWgJZlVJUPfJpHkxrdxKyVeaOp49D8LiPiu0dYUH+UNE/N2OmLT1HyjZuclqw
+    f42WrqQ4cT0wHfpNlpxZMRviCuUNMFPalstOTxJnKX+806c1dhsQL/w34j8J2Sap
+    V5a/ijAIc7DSsj0TNkEkDjECgYBVmgEHZqMvZ7U07shWIfuxIxAqH02F0yqhpVnG
+    Xy3G7vOtfKf8YBC0o3bDNBdnVcCfPVHW35xZDCPAtNvprovKMdgcSOrp4Uuptixu
+    sIxGU+Zlw9zcJ8oaOVL4Av3PFMhznWcEzA25NBsuQOIOgkyMAiP3Hr3/Uuj7ssc8
+    1oGlAwKBgF3qrJ0Jk6xeQPZJiczbqIAxQK5+Drv3H2sNZKr8k/nQ+p2e/k0JT1w5
+    J0ozGWun3dXIz7TOXtgoE03OXijyo8XYGCZC3kTVbP7j4vT3xVF4UFRoldgLRUvz
+    OT8atS6ZV0vwhBUpE6TK1QLsby0dhPphq3nPRPa9Z97R2sRJo+8w
+    -----END OPENSSH PRIVATE KEY-----

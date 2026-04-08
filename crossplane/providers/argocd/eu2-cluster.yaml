@@ -1,0 +1,16 @@
+apiVersion: cluster.argocd.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  labels:
+    purpose: dev
+  name: eu2
+spec:
+  forProvider:
+    config:
+      kubeconfigSecretRef:
+        key: kubeconfig
+        name: eu2-kubeconfig
+        namespace: argocd
+    name: eu2
+  providerConfigRef:
+    name: argocd-provider

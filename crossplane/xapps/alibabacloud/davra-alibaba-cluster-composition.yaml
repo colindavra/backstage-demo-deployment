@@ -1,0 +1,205 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: davra-alibaba-cluster-composition
+  labels:
+    type: ack
+spec:
+  compositeTypeRef:
+    apiVersion: platform.davra.com/v1alpha1
+    kind: DavraAliCluster
+  mode: Pipeline
+  pipeline:
+  - step: create-ack-cluster-resources
+    functionRef:
+      name: crossplane-contrib-function-patch-and-transform
+    input:
+      apiVersion: pt.fn.crossplane.io/v1beta1
+      kind: Resources
+
+      resources:
+      # -----------------
+      # VPC
+      # -----------------
+      - name: vpc
+        base:
+          apiVersion: vpc.alibabacloud.crossplane.io/v1alpha1
+          kind: VPC
+          spec:
+            forProvider:
+              cidrBlock: 10.0.0.0/16
+              region: cn-chengdu
+              resourceGroupId: rg-aek6hvxecshsx5a
+              vpcName: davra-gitops-test-vpc-1
+            providerConfigRef:
+              name: alibabacloud-provider
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.davra.com/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.id
+          toFieldPath: status.vpcId
+
+      # -----------------
+      # Subnet A
+      # -----------------
+      - name: subnet-a
+        base:
+          apiVersion: vpc.alibabacloud.crossplane.io/v1alpha1
+          kind: Vswitch
+          spec:
+            forProvider:
+              cidrBlock: 10.0.0.0/23
+              vpcIdSelector:
+                matchControllerRef: true
+            providerConfigRef:
+              name: alibabacloud-provider
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.davra.com/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.zoneId
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: "%s-a"
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.id
+          toFieldPath: status.subnetAId
+      # -----------------
+      # Subnet B
+      # -----------------
+      - name: subnet-b
+        base:
+          apiVersion: vpc.alibabacloud.crossplane.io/v1alpha1
+          kind: Vswitch
+          spec:
+            forProvider:
+              cidrBlock: 10.0.2.0/23
+              vpcIdSelector:
+                matchControllerRef: true
+            providerConfigRef:
+              name: alibabacloud-provider
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.davra.com/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.zoneId
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: "%s-b"
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.id
+          toFieldPath: status.subnetBId
+
+      # -----------------
+      # ACK Managed Kubernetes Cluster
+      # -----------------
+      - name: ack-cluster
+        base:
+          apiVersion: ack.alibabacloud.crossplane.io/v1alpha1
+          kind: ManagedKubernetes
+          spec:
+            forProvider:
+              clusterSpec: ack.pro.small
+              slbInternetEnabled: true
+              region: cn-chengdu
+              name: davra-gitops-ack-cluster
+              podCidr: 172.20.0.0/16
+              serviceCidr: 172.21.0.0/24
+              resourceGroupId: rg-aek6hvxecshsx5a
+              vswitchIds:
+                - ""
+                - ""
+            providerConfigRef:
+              name: alibabacloud-provider
+            writeConnectionSecretToRef:
+              namespace: crossplane-system
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.davra.com/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.version
+          toFieldPath: spec.forProvider.version
+        - type: FromCompositeFieldPath
+          fromFieldPath: status.subnetAId
+          toFieldPath: spec.forProvider.vswitchIds[0]
+          policy:
+            fromFieldPath: Required
+        - type: FromCompositeFieldPath
+          fromFieldPath: status.subnetBId
+          toFieldPath: spec.forProvider.vswitchIds[1]
+          policy:
+            fromFieldPath: Required
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: "%s-kubeconfig"
+        
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.id
+          toFieldPath: status.clusterId
+
+      - name: worker-nodepool-a
+        base:
+          apiVersion: ack.alibabacloud.crossplane.io/v1alpha1
+          kind: NodePool
+          spec:
+            forProvider:
+              clusterIdSelector:
+                matchControllerRef: true
+              instanceTypes: 
+              - ecs.c7a.2xlarge
+              region: cn-chengdu
+              nodePoolName: worker-nodepool-a
+              nodeCount: 1
+              resourceGroupId: rg-aek6hvxecshsx5a
+              systemDiskSize: 40
+              vswitchIds:
+                - ""
+              labels:
+                nodepool: worker-nodepool-a
+                davra-platform-name: davra-gitops-ack-cluster
+                davra-saas-function: qa
+            providerConfigRef:
+              name: alibabacloud-provider
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: status.subnetAId
+          toFieldPath: spec.forProvider.vswitchIds[0]
+          policy:
+            fromFieldPath: Required
+        - type: FromCompositeFieldPath
+          fromFieldPath: status.subnetBId
+          toFieldPath: spec.forProvider.vswitchIds[1]
+          policy:
+            fromFieldPath: Required
+        

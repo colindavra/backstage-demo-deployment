@@ -1,0 +1,24 @@
+apiVersion: openidclient.keycloak.m.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: grafana-client
+spec:
+  forProvider:
+    realmId: basic-realm
+    clientId: grafana
+    enabled: true
+    accessType: confidential
+    alwaysDisplayInConsole: true
+    rootUrl: https://grafana2.colin.developers.davra.io
+    adminUrl: https://grafana2.colin.developers.davra.io
+    baseUrl: /login/generic_oauth
+    validRedirectUris:
+    - https://grafana2.colin.developers.davra.io/*
+    webOrigins:
+    - https://grafana2.colin.developers.davra.io
+    standardFlowEnabled: true
+  providerConfigRef:
+    name: keycloak-provider-config
+    kind: ProviderConfig
+  writeConnectionSecretToRef:
+    name: grafana-client-conn

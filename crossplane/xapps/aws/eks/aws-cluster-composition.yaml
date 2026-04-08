@@ -1,0 +1,268 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: eks-cluster-v2
+  labels:
+    type: eks
+spec:
+  compositeTypeRef:
+    apiVersion: platform.example.org/v1alpha1
+    kind: XCluster
+  mode: Pipeline
+  pipeline:
+  - step: create-eks-cluster-resources
+    functionRef:
+      name: crossplane-contrib-function-patch-and-transform
+    input:
+      apiVersion: pt.fn.crossplane.io/v1beta1
+      kind: Resources
+
+      resources:
+      # -----------------
+      # VPC
+      # -----------------
+      - name: vpc
+        base:
+          apiVersion: ec2.aws.m.upbound.io/v1beta1
+          kind: VPC
+          spec:
+            forProvider:
+              cidrBlock: 10.0.0.0/16
+              enableDnsSupport: true
+              enableDnsHostnames: true
+            providerConfigRef:
+              name: default
+              kind: ClusterProviderConfig
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.example.org/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+
+      # -----------------
+      # Subnet A
+      # -----------------
+      - name: subnet-a
+        base:
+          apiVersion: ec2.aws.m.upbound.io/v1beta1
+          kind: Subnet
+          spec:
+            forProvider:
+              cidrBlock: 10.0.1.0/24
+              vpcIdSelector:
+                matchControllerRef: true
+            providerConfigRef:
+              name: default
+              kind: ClusterProviderConfig
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.example.org/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.availabilityZone
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: "%sa"
+      # -----------------
+      # Subnet B
+      # -----------------
+      - name: subnet-b
+        base:
+          apiVersion: ec2.aws.m.upbound.io/v1beta1
+          kind: Subnet
+          spec:
+            forProvider:
+              cidrBlock: 10.0.2.0/24
+              vpcIdSelector:
+                matchControllerRef: true
+            providerConfigRef:
+              name: default
+              kind: ClusterProviderConfig
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.example.org/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.availabilityZone
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: "%sb"
+
+        # -----------------
+      # IAM Role
+      # -----------------
+      - name: cluster-role
+        base:
+          apiVersion: iam.aws.m.upbound.io/v1beta1
+          kind: Role
+          spec:
+            forProvider:
+              assumeRolePolicy: |
+                {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                    {
+                      "Effect": "Allow",
+                      "Principal": { "Service": "eks.amazonaws.com" },
+                      "Action": "sts:AssumeRole"
+                    }
+                  ]
+                }
+            providerConfigRef:
+              name: default
+              kind: ClusterProviderConfig
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.example.org/xcluster]
+
+      # -----------------
+      # EKS Cluster
+      # -----------------
+      - name: eks
+        base:
+          apiVersion: eks.aws.m.upbound.io/v1beta1
+          kind: Cluster
+          spec:
+            forProvider:
+              roleArnSelector:
+                matchControllerRef: true
+              vpcConfig:
+                subnetIdSelector:
+                  matchControllerRef: true
+            providerConfigRef:
+              name: default
+              kind: ClusterProviderConfig
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.example.org/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.version
+          toFieldPath: spec.forProvider.version
+
+
+      - name: eks-cluster-auth
+        base:
+          apiVersion: eks.aws.m.upbound.io/v1beta1
+          kind: ClusterAuth
+          metadata:
+            annotations:
+              meta.upbound.io/example-id: eks/v1beta1/cluster
+          spec:
+            forProvider:
+              clusterNameSelector:
+                matchControllerRef: true
+            providerConfigRef:
+              name: default
+              kind: ClusterProviderConfig
+            writeConnectionSecretToRef:
+              name: connection-secret
+        patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.example.org/xcluster]
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.region
+        - type: FromCompositeFieldPath
+          fromFieldPath: 'metadata.name'
+          toFieldPath: 'spec.writeConnectionSecretToRef.name'
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: '%s-eks-cluster-auth-connection-secret'
+        connectionDetails:
+        - type: FromConnectionSecretKey
+          fromConnectionSecretKey: kubeconfig
+          name: kubeconfig
+
+      # -----------------
+      # ArgoCD Cluster Secret
+      # -----------------
+      - name: argocd-cluster-secret
+        base:
+          apiVersion: kubernetes.m.crossplane.io/v1alpha1
+          kind: Object
+          spec:
+            forProvider:
+              manifest:
+                apiVersion: cluster.argocd.crossplane.io/v1alpha1
+                kind: Cluster
+                metadata:
+                  name: ""
+                spec:
+                  forProvider:
+                    config:
+                      kubeconfigSecretRef:
+                        key: kubeconfig
+                        name: ""
+                        namespace: argocd
+                    name: ""
+                    labels:
+                      platform.example.org/xcluster: ""
+                  providerConfigRef:
+                    name: argocd-provider
+                    kind: ProviderConfig
+            providerConfigRef:
+              name: kubernetes-provider
+              kind: ProviderConfig
+        patches:
+          # add a label to the argocd Cluster resource to indicate which xcluster it belongs to
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: metadata.labels[platform.example.org/xcluster]
+
+          # add a label to the argocd Cluster secret resource to indicate which xcluster it belongs to
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.spec.forProvider.labels[platform.example.org/xcluster]
+
+          # set the name of the argocd Cluster resource to be the same as the xcluster name with a suffix, e.g. dev-cluster-argocd-cluster
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.metadata.name
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: '%s-argocd-cluster'
+
+          # name of the kubeconfig secret to be used by argocd for this cluster
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.spec.forProvider.config.kubeconfigSecretRef.name
+          transforms:
+          - type: string
+            string:
+              type: Format
+              fmt: '%s-eks-cluster-auth-connection-secret'
+
+          # namespace for the kubeconfig secret to be used by argocd for this cluster
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.namespace
+          toFieldPath: spec.forProvider.manifest.spec.forProvider.config.kubeconfigSecretRef.namespace
+          
+          # name of the cluster as seen in argocd
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.spec.forProvider.name
+
